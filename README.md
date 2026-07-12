@@ -1,5 +1,7 @@
 # lab-agent
 
+I got frustrated watching scientists spend half their day moving plates between instruments that don't talk to each other. I built the layer in between,  you describe the experiment, it coordinates the microscope, liquid handler, and cytometer in sequence, waits for each one, branches on conditions, and saves everything with full provenance. Tested with real HeLa cell images from the Broad Institute. The software layer is done — gap to production is wiring in the physical hardware.
+
 You have a microscope, a liquid-handling robot, and a flow cytometer. Each has its own software and none of them talk to each other. This is the glue layer.
 
 You type what you want — "stain plate P001, image every 30 minutes, if mitotic index goes above 20% run cytometry on those wells". The system runs the instruments in order, waits for each one to finish, and saves every result with a record of exactly how it was produced. When it branches on a condition, it does that automatically too.
