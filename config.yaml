@@ -1,0 +1,47 @@
+# Lab Agent Configuration
+
+simulation_mode: true   # set false to connect real instruments
+
+instruments:
+  microscope:
+    mode: simulation      # simulation | pymmcore | harmony_api
+    config_file: null     # path to Micro-Manager config (real mode only)
+    api_endpoint: null    # e.g. http://192.168.1.10:8080 (harmony mode)
+    default_channels: ["DAPI", "FITC", "TRITC"]
+    default_objective: "20x"
+    default_z_step_um: 1.0
+    default_z_slices: 5
+
+  flow_cytometer:
+    mode: simulation      # simulation | cytek | bd_facsdiva
+    api_endpoint: null
+    default_channels: ["FSC", "SSC", "FITC", "PE", "APC"]
+
+  liquid_handler:
+    mode: simulation      # simulation | hamilton | opentrons
+    api_endpoint: null    # e.g. http://192.168.1.20:31950 (opentrons)
+    robot_type: opentrons_flex
+
+analysis:
+  mode: watershed         # "watershed" (fast, good for small dense nuclei like BBBC020)
+                          # "cellpose"  (slower, best for 30-100px nuclei with GPU)
+                          # "simulation" (no segmentation, fast demo only)
+
+data:
+  database_url: "sqlite:///lab_agent.db"
+  lims_path: "lab_lims.db"
+  storage_path: "./experiment_data"
+  omero_host: null        # null = use local storage only
+  s3_bucket: null         # null = no cloud sync
+
+llm:
+  backend: auto          # auto = Groq > Anthropic > Ollama (first key found)
+  # backend: groq          # force Groq (needs GROQ_API_KEY)
+  # backend: anthropic     # force Anthropic (needs ANTHROPIC_API_KEY)
+  # backend: ollama        # force local Ollama (no key needed)
+  model: "claude-sonnet-4-5"           # used if backend=anthropic
+  groq_model: "llama-3.3-70b-versatile"  # primary; auto-falls back if rate-limited
+  groq_model_fallback: "qwen/qwen3-32b"  # higher daily limit, strong tool-use support
+  ollama_model: "qwen2.5:14b"          # used if backend=ollama
+  max_tokens: 4096
+  temperature: 0.2

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="860" height="380" font-family="ui-monospace, 'SF Mono', Menlo, monospace">
+  <defs>
+    <marker id="a" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="380" fill="#0f1117" rx="10"/>
+
+  <!-- Title -->
+  <text x="430" y="32" fill="#f1f5f9" font-size="15" font-weight="700" text-anchor="middle">M1M4 Milestones at a Glance</text>
+
+  <!-- M1 card -->
+  <rect x="20" y="50" width="195" height="310" rx="10" fill="#0c1929" stroke="#2563eb" stroke-width="2"/>
+  <rect x="20" y="50" width="195" height="36" rx="10" fill="#1d3a5c"/>
+  <rect x="20" y="72" width="195" height="14" fill="#1d3a5c"/>
+  <text x="117" y="74" fill="#93c5fd" font-size="12" font-weight="700" text-anchor="middle">M1  Async Jobs</text>
+  <text x="30" y="106" fill="#64748b" font-size="9">acquire_images()</text>
+  <text x="30" y="121" fill="#94a3b8" font-size="10">’ returns job_id instantly</text>
+  <text x="30" y="143" fill="#64748b" font-size="9">Background Thread</text>
+  <text x="30" y="158" fill="#94a3b8" font-size="10">’ simulates acquisition</text>
+  <text x="30" y="180" fill="#64748b" font-size="9">wait_for_job()</text>
+  <text x="30" y="195" fill="#94a3b8" font-size="10">’ polls SQLite DB</text>
+  <text x="30" y="217" fill="#64748b" font-size="9">ProtocolExecutor</text>
+  <text x="30" y="232" fill="#94a3b8" font-size="10">’ auto-waits before</text>
+  <text x="30" y="246" fill="#94a3b8" font-size="10">   next step</text>
+  <text x="30" y="268" fill="#64748b" font-size="9">Durable?</text>
+  <text x="30" y="283" fill="#f87171" font-size="10">’ threading only</text>
+  <text x="30" y="297" fill="#94a3b8" font-size="9.5">(not Temporal yet)</text>
+
+  <!-- M2 card -->
+  <rect x="230" y="50" width="195" height="310" rx="10" fill="#1c1408" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="230" y="50" width="195" height="36" rx="10" fill="#3d2c0c"/>
+  <rect x="230" y="72" width="195" height="14" fill="#3d2c0c"/>
+  <text x="327" y="74" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="middle">M2  Safety Validator</text>
+  <text x="240" y="106" fill="#64748b" font-size="9">validate_tool_call()</text>
+  <text x="240" y="121" fill="#94a3b8" font-size="10">’ before every dispatch</text>
+  <text x="240" y="143" fill="#64748b" font-size="9">Checks</text>
+  <text x="240" y="158" fill="#94a3b8" font-size="10">’ channels (valid set)</text>
+  <text x="240" y="172" fill="#94a3b8" font-size="10">’ volumes (0.51000 µL)</text>
+  <text x="240" y="186" fill="#94a3b8" font-size="10">’ well format (A1H12)</text>
+  <text x="240" y="200" fill="#94a3b8" font-size="10">’ timepoint range</text>
+  <text x="240" y="222" fill="#64748b" font-size="9">On failure</text>
+  <text x="240" y="237" fill="#94a3b8" font-size="10">’ returns reason string</text>
+  <text x="240" y="251" fill="#94a3b8" font-size="10">’ LLM self-corrects</text>
+  <text x="240" y="273" fill="#64748b" font-size="9">Limits</text>
+  <text x="240" y="288" fill="#f87171" font-size="10">’ hardcoded constants</text>
+  <text x="240" y="302" fill="#94a3b8" font-size="9.5">(not from firmware)</text>
+
+  <!-- M3 card -->
+  <rect x="440" y="50" width="195" height="310" rx="10" fill="#091a12" stroke="#16a34a" stroke-width="2"/>
+  <rect x="440" y="50" width="195" height="36" rx="10" fill="#14341e"/>
+  <rect x="440" y="72" width="195" height="14" fill="#14341e"/>
+  <text x="537" y="74" fill="#4ade80" font-size="12" font-weight="700" text-anchor="middle">M3  Local LIMS</text>
+  <text x="450" y="106" fill="#64748b" font-size="9">write_plate_results()</text>
+  <text x="450" y="121" fill="#94a3b8" font-size="10">’ after each analyze</text>
+  <text x="450" y="143" fill="#64748b" font-size="9">Metrics stored</text>
+  <text x="450" y="158" fill="#94a3b8" font-size="10">’ cells, mitotic_pct</text>
+  <text x="450" y="172" fill="#94a3b8" font-size="10">’ live_pct, mean_dapi</text>
+  <text x="450" y="186" fill="#94a3b8" font-size="10">’ mean_fitc</text>
+  <text x="450" y="208" fill="#64748b" font-size="9">LLM queries</text>
+  <text x="450" y="223" fill="#94a3b8" font-size="10">’ summary (top well)</text>
+  <text x="450" y="237" fill="#94a3b8" font-size="10">’ timecourse</text>
+  <text x="450" y="251" fill="#94a3b8" font-size="10">’ filter by metric</text>
+  <text x="450" y="273" fill="#64748b" font-size="9">Current: 70 rows</text>
+  <text x="450" y="288" fill="#f87171" font-size="10">’ SQLite (not Benchling)</text>
+  <text x="450" y="302" fill="#94a3b8" font-size="9.5">(not GxP compliant)</text>
+
+  <!-- M4 card -->
+  <rect x="650" y="50" width="190" height="310" rx="10" fill="#130f29" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="650" y="50" width="190" height="36" rx="10" fill="#271a50"/>
+  <rect x="650" y="72" width="190" height="14" fill="#271a50"/>
+  <text x="745" y="74" fill="#c4b5fd" font-size="12" font-weight="700" text-anchor="middle">M4  Protocol Executor</text>
+  <text x="660" y="106" fill="#64748b" font-size="9">plan_experiment()</text>
+  <text x="660" y="121" fill="#94a3b8" font-size="10">’ Groq generates JSON</text>
+  <text x="660" y="135" fill="#94a3b8" font-size="10">’ 3× retry on bad JSON</text>
+  <text x="660" y="157" fill="#64748b" font-size="9">Validation</text>
+  <text x="660" y="172" fill="#94a3b8" font-size="10">’ all steps checked</text>
+  <text x="660" y="186" fill="#94a3b8" font-size="10">’ 1 self-correction pass</text>
+  <text x="660" y="208" fill="#64748b" font-size="9">Human gate</text>
+  <text x="660" y="223" fill="#94a3b8" font-size="10">’ --approve / --loop</text>
+  <text x="660" y="245" fill="#64748b" font-size="9">Execution</text>
+  <text x="660" y="260" fill="#94a3b8" font-size="10">’ deterministic steps</text>
+  <text x="660" y="274" fill="#94a3b8" font-size="10">’ halts on first error</text>
+  <text x="660" y="296" fill="#f87171" font-size="10">’ no web UI yet</text>
+  <text x="660" y="310" fill="#94a3b8" font-size="9.5">(FastAPI TODO)</text>
+
+  <!-- Status pills bottom -->
+  <rect x="62" y="340" width="110" height="22" rx="11" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1"/>
+  <text x="117" y="356" fill="#93c5fd" font-size="10" font-weight="600" text-anchor="middle">COMPLETE</text>
+  <rect x="272" y="340" width="110" height="22" rx="11" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1"/>
+  <text x="327" y="356" fill="#93c5fd" font-size="10" font-weight="600" text-anchor="middle">COMPLETE</text>
+  <rect x="482" y="340" width="110" height="22" rx="11" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1"/>
+  <text x="537" y="356" fill="#93c5fd" font-size="10" font-weight="600" text-anchor="middle">COMPLETE</text>
+  <rect x="690" y="340" width="110" height="22" rx="11" fill="#1e3a5f" stroke="#3b82f6" stroke-width="1"/>
+  <text x="745" y="356" fill="#93c5fd" font-size="10" font-weight="600" text-anchor="middle">COMPLETE</text>
+</svg>

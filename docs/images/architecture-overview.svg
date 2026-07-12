@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620" font-family="ui-monospace, 'SF Mono', Menlo, monospace">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#22c55e"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#0f1117" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="38" fill="#f1f5f9" font-size="18" font-weight="700" text-anchor="middle">lab-agent  Agentic Closed-Loop Architecture</text>
+  <text x="450" y="58" fill="#64748b" font-size="11" text-anchor="middle">M1 Async · M2 Validator · M3 LIMS · M4 Protocol Executor</text>
+
+  <!-- Layer: User -->
+  <rect x="320" y="76" width="260" height="52" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="450" y="97" fill="#94a3b8" font-size="10" text-anchor="middle">USER INPUT</text>
+  <text x="450" y="115" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">Natural Language Goal</text>
+  <line x1="450" y1="128" x2="450" y2="158" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Layer: LLM Orchestrator -->
+  <rect x="270" y="158" width="360" height="56" rx="8" fill="#0f2027" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text x="450" y="178" fill="#7dd3fc" font-size="10" text-anchor="middle">ORCHESTRATOR</text>
+  <text x="450" y="198" fill="#e0f2fe" font-size="13" font-weight="700" text-anchor="middle">LLM  ·  Groq / Anthropic / Ollama</text>
+
+  <!-- Arrow from orch to validator -->
+  <line x1="450" y1="214" x2="450" y2="242" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="456" y="232" fill="#64748b" font-size="9">every tool call</text>
+
+  <!-- Layer: M2 Validator -->
+  <rect x="270" y="242" width="360" height="52" rx="8" fill="#1c1408" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="450" y="261" fill="#fbbf24" font-size="10" text-anchor="middle">M2  SAFETY</text>
+  <text x="450" y="279" fill="#fef3c7" font-size="13" font-weight="600" text-anchor="middle">Protocol Validator</text>
+
+  <!-- Fork from validator -->
+  <line x1="310" y1="294" x2="140" y2="340" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="390" y1="294" x2="340" y2="340" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="510" y1="294" x2="560" y2="340" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="590" y1="294" x2="760" y2="340" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Instruments row -->
+  <!-- acquire_images -->
+  <rect x="30" y="340" width="200" height="64" rx="8" fill="#0c1929" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="130" y="360" fill="#93c5fd" font-size="10" text-anchor="middle">M1  ASYNC</text>
+  <text x="130" y="378" fill="#dbeafe" font-size="12" font-weight="600" text-anchor="middle">acquire_images()</text>
+  <text x="130" y="394" fill="#64748b" font-size="9.5" text-anchor="middle">’ job_id + bg thread</text>
+
+  <!-- plan_experiment -->
+  <rect x="250" y="340" width="200" height="64" rx="8" fill="#130f29" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="350" y="360" fill="#c4b5fd" font-size="10" text-anchor="middle">M4  PROTOCOL</text>
+  <text x="350" y="378" fill="#ede9fe" font-size="12" font-weight="600" text-anchor="middle">plan_experiment()</text>
+  <text x="350" y="394" fill="#64748b" font-size="9.5" text-anchor="middle">JSON + 3× retry</text>
+
+  <!-- analyze_images -->
+  <rect x="470" y="340" width="200" height="64" rx="8" fill="#0c1929" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="570" y="360" fill="#93c5fd" font-size="10" text-anchor="middle">ANALYSIS</text>
+  <text x="570" y="378" fill="#dbeafe" font-size="12" font-weight="600" text-anchor="middle">analyze_images()</text>
+  <text x="570" y="394" fill="#64748b" font-size="9.5" text-anchor="middle">Watershed / Cellpose</text>
+
+  <!-- cytometry -->
+  <rect x="690" y="340" width="180" height="64" rx="8" fill="#0c1929" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="780" y="360" fill="#93c5fd" font-size="10" text-anchor="middle">CYTOMETRY</text>
+  <text x="780" y="378" fill="#dbeafe" font-size="12" font-weight="600" text-anchor="middle">flow_cytometry()</text>
+  <text x="780" y="394" fill="#64748b" font-size="9.5" text-anchor="middle">10k event populations</text>
+
+  <!-- Async job wait arrow -->
+  <path d="M130,404 C130,430 570,430 570,404" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-blue)"/>
+  <text x="350" y="448" fill="#3b82f6" font-size="9" text-anchor="middle">wait_for_job()  polls DB until images ready</text>
+
+  <!-- plan ’ approval -->
+  <line x1="350" y1="404" x2="350" y2="460" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Approval gate -->
+  <rect x="240" y="460" width="220" height="52" rx="8" fill="#1a1208" stroke="#d97706" stroke-width="2"/>
+  <text x="350" y="480" fill="#fbbf24" font-size="10" text-anchor="middle">HUMAN GATE</text>
+  <text x="350" y="498" fill="#fef3c7" font-size="12" font-weight="700" text-anchor="middle">Approval Required</text>
+  <line x1="350" y1="512" x2="350" y2="548" stroke="#d97706" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Protocol executor -->
+  <rect x="240" y="548" width="220" height="52" rx="8" fill="#130f29" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="350" y="568" fill="#c4b5fd" font-size="10" text-anchor="middle">M4  EXECUTOR</text>
+  <text x="350" y="586" fill="#ede9fe" font-size="12" font-weight="600" text-anchor="middle">ProtocolExecutor</text>
+
+  <!-- LIMS arrows from analyze + cytometry -->
+  <line x1="570" y1="404" x2="670" y2="460" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="780" y1="404" x2="710" y2="460" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+  <!-- LIMS box -->
+  <rect x="620" y="460" width="240" height="64" rx="8" fill="#091a12" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="740" y="482" fill="#4ade80" font-size="10" text-anchor="middle">M3  LIMS</text>
+  <text x="740" y="500" fill="#dcfce7" font-size="13" font-weight="700" text-anchor="middle">lab_lims.db</text>
+  <text x="740" y="516" fill="#64748b" font-size="9.5" text-anchor="middle">5 metrics · n wells · provenance</text>
+
+  <!-- LIMS ’ LLM feedback -->
+  <path d="M620,490 C560,490 530,300 530,214" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr-green)"/>
+  <text x="538" y="370" fill="#22c55e" font-size="9" transform="rotate(-70, 538, 370)">query_lims() feedback</text>
+
+  <!-- Executor ’ instruments feedback -->
+  <path d="M240,570 C170,570 130,450 130,404" fill="none" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+
+  <!-- Loop back arrow -->
+  <path d="M860,574 C890,574 900,100 900,100 C900,74 740,74 630,74 C540,74 450,74 450,76" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arr-blue)"/>
+  <text x="882" y="350" fill="#3b82f6" font-size="9" text-anchor="middle" transform="rotate(-90, 882, 350)">--loop N: LIMS ’ next plan</text>
+</svg>

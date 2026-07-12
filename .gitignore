@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment / secrets — NEVER commit these
+.env
+.env.*
+!.env.example
+
+# Databases — contain experiment data, not source
+*.db
+*.db-shm
+*.db-wal
+
+# Experiment data (images, outputs) — too large for git
+experiment_data/
+output/
+batch/
+
+# Bundled datasets — download instructions in docs/SYSTEM.md
+datasets/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
+
+# Distribution
+*.tar.gz
+*.whl
