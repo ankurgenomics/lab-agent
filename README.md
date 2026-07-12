@@ -1,8 +1,8 @@
 # lab-agent
 
-**Natural-language orchestration of multi-instrument biotech workflows.**
+Running a mitosis assay used to mean opening four different vendor GUIs, waiting, copying well IDs between spreadsheets, and hoping nothing got misaligned. This project is my attempt to fix that.
 
-A scientist types one sentence. The system sequences a liquid handler, confocal microscope, image analysis pipeline, and flow cytometer — handling async job tracking, safety validation, and data archiving automatically.
+You describe what you want. The system figures out the order — staining, imaging, segmentation, cytometry — waits for each instrument to finish, checks the results, and branches if something interesting happens. All of it ends up in a queryable database with the full provenance of how each number was produced.
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://python.org)
 [![SQLite](https://img.shields.io/badge/storage-SQLite%20%2B%20LIMS-green.svg)](https://sqlite.org)
@@ -13,7 +13,7 @@ python run.py "Run a mitosis assay on plate P001. Image every 30 minutes.
                If mitotic index exceeds 20%, sort positive cells by flow cytometry."
 ```
 
-That one command triggers: liquid handler staining → async confocal acquisition → watershed cell segmentation → LIMS archival → conditional cytometry sort — with no operator steps between them.
+That runs: liquid handler staining → async confocal acquisition → watershed segmentation → LIMS write → conditional cytometry sort. No manual steps between them.
 
 ---
 
@@ -42,7 +42,7 @@ The system has four independently testable layers. Each can be unit-tested witho
 
 ![Closed-loop sequence](docs/images/closed-loop-sequence.png)
 
-Run `--loop N` to cycle the full workflow automatically. Each cycle injects the previous cycle's LIMS summary as context for the next plan — the system proposes better experiments as it sees more data.
+Run `--loop N` to cycle the full workflow automatically. Each cycle feeds the previous LIMS results into the next plan, so the system gets more targeted as it runs.
 
 ```bash
 python run.py --loop 3 "Measure mitotic index in wells A1, B1, C1"
@@ -60,7 +60,7 @@ python run.py --loop 3 "Measure mitotic index in wells A1, B1, C1"
 
 ![Validator](docs/images/validator-blocks.png)
 
-Every result is stored with: `experiment_id · plate_id · well · timepoint · metric · value · instrument · method · acquired_at`.
+Every result is stored with: `experiment_id · plate_id · well · timepoint · metric · value · instrument · method · acquired_at`. Query it later, cross-reference across experiments, build timecourses — it's all there.
 
 ---
 
@@ -83,6 +83,8 @@ Every result is stored with: `experiment_id · plate_id · well · timepoint · 
 
 ## Quick Start
 
+No hardware needed to try it. Simulation mode generates realistic synthetic images and cytometry populations so you can run the full pipeline on any machine.
+
 ```bash
 # 1. Install
 git clone https://github.com/your-handle/lab-agent
@@ -101,7 +103,7 @@ python run.py --demo
 python run.py "Image wells A1-A6 on plate P001 with DAPI and FITC. Analyze mitotic index."
 ```
 
-> **No hardware required.** Simulation mode generates realistic synthetic images, flow cytometry populations, and liquid-handling logs. Flip one line in `config.yaml` to connect real instruments.
+> **Simulation mode runs out of the box.** No hardware, no image files needed. Flip one line in `config.yaml` to connect real instruments.
 
 ---
 
@@ -165,6 +167,8 @@ Every block returns a typed reason string. The orchestrator feeds the reason bac
 ---
 
 ## Connecting Real Hardware
+
+One config change per instrument. The drivers share the same return schema in simulation and real modes — nothing else changes.
 
 ### Microscope (any Micro-Manager compatible)
 
@@ -289,13 +293,13 @@ See [docs/SYSTEM.md](docs/SYSTEM.md) for the full architecture reference, config
 
 ## Enterprise Context
 
-Three workflows where this architecture directly reduces cost:
+Three places this saves real money:
 
-**Contract research (CRO):** 40% of technician time on a 96-well plate campaign is spent on manual instrument handoffs. Automating the acquire → analyse → sort pipeline at 20 plates/day saves ~8 FTE-hours daily — roughly £120,000/year per site at fully-loaded UK CRO rates.
+**CROs:** About 40% of a technician's time on a 96-well plate campaign goes on instrument handoffs — moving plates, re-entering well IDs, waiting for one software to finish before starting the next. Automating the acquire → analyse → sort step at 20 plates/day is roughly 8 hours of operator time saved daily. At UK CRO fully-loaded rates that's around £120,000/year per site.
 
-**Pharma HTS triage:** High-throughput screening campaigns run 10,000–100,000 compounds. The bottleneck is the decision layer — which wells to escalate, which concentrations to re-test. An LLM-driven decision layer on top of real LIMS data compresses 8-week campaigns to 5 weeks.
+**Pharma HTS:** HTS campaigns run 10,000–100,000 compounds. The instruments aren't the bottleneck — deciding which wells to escalate, which concentrations to re-test, is. A decision layer sitting on top of live LIMS data cuts the triage step and compresses 8-week campaigns to 5.
 
-**Academic core facilities:** Pre-validation of every booking slot catches volume errors, incompatible channel combinations, and under-specified wells before the scientist walks into the room. Saves ~30 minutes per booking × 20 bookings per day = 10 hours/day of corrective time.
+**Academic core facilities:** Pre-validating every booking slot catches bad protocols before the scientist walks in — wrong channel combinations, volumes out of range, under-specified wells. At 20 bookings/day that's an hour or two of corrective time recovered every morning.
 
 ---
 
