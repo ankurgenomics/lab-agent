@@ -19,7 +19,7 @@ That one command triggers: liquid handler staining → async confocal acquisitio
 
 ## Architecture
 
-![Architecture overview](docs/images/architecture-overview.svg)
+![Architecture overview](docs/images/architecture-overview.png)
 
 The system has four independently testable layers. Each can be unit-tested without hardware.
 
@@ -34,13 +34,13 @@ The system has four independently testable layers. Each can be unit-tested witho
 
 ## Milestones
 
-![M1–M4 milestones](docs/images/milestones.svg)
+![M1–M4 milestones](docs/images/milestones.png)
 
 ---
 
 ## Automated Closed-Loop
 
-![Closed-loop sequence](docs/images/closed-loop-sequence.svg)
+![Closed-loop sequence](docs/images/closed-loop-sequence.png)
 
 Run `--loop N` to cycle the full workflow automatically. Each cycle injects the previous cycle's LIMS summary as context for the next plan — the system proposes better experiments as it sees more data.
 
@@ -52,7 +52,13 @@ python run.py --loop 3 "Measure mitotic index in wells A1, B1, C1"
 
 ## LIMS — per-well tracking
 
-![LIMS chart](docs/images/lims-chart.svg)
+![LIMS chart](docs/images/lims-chart.png)
+
+---
+
+## Safety Validator
+
+![Validator](docs/images/validator-blocks.png)
 
 Every result is stored with: `experiment_id · plate_id · well · timepoint · metric · value · instrument · method · acquired_at`.
 
