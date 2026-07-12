@@ -1,10 +1,8 @@
 # lab-agent
 
-Running a mitosis assay used to mean opening four different vendor GUIs in sequence, copying well IDs between spreadsheets, and hoping nothing got misaligned between the liquid handler software and the microscope software and the image analysis software and the cytometer software. Every instrument is from a different vendor, none of them talk to each other, and the scientist in the middle becomes the glue.
+You have a microscope, a liquid-handling robot, and a flow cytometer. Each has its own software and none of them talk to each other. This is the glue layer.
 
-This project is my attempt to remove that glue layer.
-
-You describe the experiment in plain English. The system works out the order of operations, dispatches each instrument, waits for it to finish, checks the result, and branches if something interesting happens. Everything lands in a local database with the full record of what ran, when, on which instrument, and with which parameters.
+You type what you want — "stain plate P001, image every 30 minutes, if mitotic index goes above 20% run cytometry on those wells". The system runs the instruments in order, waits for each one to finish, and saves every result with a record of exactly how it was produced. When it branches on a condition, it does that automatically too.
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://python.org)
 [![SQLite](https://img.shields.io/badge/storage-SQLite%20%2B%20LIMS-green.svg)](https://sqlite.org)
